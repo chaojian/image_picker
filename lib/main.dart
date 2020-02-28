@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:image_picker/SelectedImagesPage.dart';
 import 'package:image_picker/fluttertoast.dart';
 
 void main() => runApp(MyApp());
@@ -66,7 +67,12 @@ class _MainPageState extends State<MainPage> {
   Widget buildConfirmButton() {
     if (mSelectedImages.length > 0) {
       return new IconButton(
-          icon: new Icon(Icons.check, color: Colors.white), onPressed: null);
+          icon: new Icon(Icons.check, color: Colors.white),
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return SelectedImagesPage(mSelectedImages);
+            }));
+          });
     } else {
       return new Container();
     }
