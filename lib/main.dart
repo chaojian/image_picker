@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:image_picker/BrowseImagesPage.dart';
 import 'package:image_picker/SelectedImagesPage.dart';
 import 'package:image_picker/fluttertoast.dart';
 
@@ -101,12 +102,13 @@ class _MainPageState extends State<MainPage> {
           crossAxisSpacing: 3,
           childAspectRatio: 1.0),
       itemBuilder: (context, index) {
-        return buildItem(imageList[index]);
+        return buildItem(index);
       },
     );
   }
 
-  Widget buildItem(String imagePath) {
+  Widget buildItem(int index) {
+    String imagePath = imageList[index];
     bool alreadySelected = mSelectedImages.contains(imagePath);
 
     return new GestureDetector(
@@ -152,7 +154,11 @@ class _MainPageState extends State<MainPage> {
           )
         ],
       ),
-      onTap: () {},
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (_) {
+          return BrowseImagesPage(index, imageList);
+        }));
+      },
     );
   }
 }
