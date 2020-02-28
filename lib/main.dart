@@ -31,6 +31,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   static const platform = MethodChannel("com.lichaojian.image_picker/Media");
   List imageList;
+  final mSelectedImages = new Set<String>();
 
   @override
   void initState() {
@@ -62,7 +63,8 @@ class _MainPageState extends State<MainPage> {
   }
 
   Widget buildConfirmButton() {
-    return new IconButton(icon: new Icon(Icons.check, color: Colors.white), onPressed: null);
+    return new IconButton(
+        icon: new Icon(Icons.check, color: Colors.white), onPressed: null);
   }
 
   Widget getMainBody() {
@@ -94,28 +96,41 @@ class _MainPageState extends State<MainPage> {
   }
 
   Widget buildItem(String imagePath) {
+    bool alreadySelected = mSelectedImages.contains(imagePath);
+
     return new GestureDetector(
       child: Stack(
         children: <Widget>[
           new ClipRRect(
             borderRadius: BorderRadius.circular(3),
-            child: Image.file(File(imagePath), width: 200,
-                height: 200,
-                cacheWidth: 200,
-                cacheHeight: 200),
+            child: Image.file(File(imagePath),
+                width: 200, height: 200, cacheWidth: 200, cacheHeight: 200),
           ),
           new Align(
             alignment: Alignment.bottomRight,
             child: Checkbox(
-              onChanged: (value) {
+              value: alreadySelected,
+              onChanged: (newValue) {
+                setState(() {
+                  if (alreadySelected) {
+                    mSelectedImages.remove(imagePath);
+                  } else {
+                    mSelectedImages.add(imagePath);
+                  }
+
+                  alreadySelected = newValue;
+                });
               },
+              autofocus: false,
+              tristate: true,
+              activeColor: Colors.blueGrey,
+              checkColor: Colors.green,
+              materialTapTargetSize: MaterialTapTargetSize.padded,
             ),
           )
         ],
       ),
-      onTap: () {
-
-      },
+      onTap: () {},
     );
   }
 }
