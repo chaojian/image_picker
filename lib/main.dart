@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:image_picker/fluttertoast.dart';
 
 void main() => runApp(MyApp());
 
@@ -115,6 +116,17 @@ class _MainPageState extends State<MainPage> {
             child: Checkbox(
               value: alreadySelected,
               onChanged: (newValue) {
+                if (mSelectedImages.length == 9 && !alreadySelected) {
+                  Fluttertoast.showToast(
+                      msg: "你最多只能选择9张图片",
+                      toastLength: Toast.LENGTH_LONG,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIos: 1,
+                      backgroundColor: Colors.black54,
+                      textColor: Colors.white,
+                      fontSize: 16.0);
+                  return;
+                }
                 setState(() {
                   if (alreadySelected) {
                     mSelectedImages.remove(imagePath);
