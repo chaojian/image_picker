@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:image_picker/BrowseImagesPage.dart';
 
 class SelectedImagesPage extends StatefulWidget {
   Set<String> mSelectedImages;
@@ -38,19 +39,24 @@ class SelectedImagesPageState extends State<SelectedImagesPage> {
           crossAxisSpacing: 3,
           childAspectRatio: 1.0),
       itemBuilder: (context, index) {
-        return buildItem(mSelectedImageList[index]);
+        return buildItem(index);
       },
     );
   }
 
-  Widget buildItem(String imagePath) {
+  Widget buildItem(int index) {
+    String imagePath = mSelectedImageList[index];
     return new GestureDetector(
       child: new ClipRRect(
         borderRadius: BorderRadius.circular(3),
         child: Image.file(File(imagePath),
             width: 200, height: 200, cacheWidth: 200, cacheHeight: 200),
       ),
-      onTap: () {},
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (_) {
+          return BrowseImagesPage(index, mSelectedImageList);
+        }));
+      },
     );
   }
 
