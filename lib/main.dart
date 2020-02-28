@@ -63,8 +63,12 @@ class _MainPageState extends State<MainPage> {
   }
 
   Widget buildConfirmButton() {
-    return new IconButton(
-        icon: new Icon(Icons.check, color: Colors.white), onPressed: null);
+    if (mSelectedImages.length > 0) {
+      return new IconButton(
+          icon: new Icon(Icons.check, color: Colors.white), onPressed: null);
+    } else {
+      return new Container();
+    }
   }
 
   Widget getMainBody() {
