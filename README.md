@@ -236,4 +236,8 @@ Widget getPageView(index) {
 ## 4. 结语
 通过这一个小小的Demo，可以看出，Flutter在UI方面的编写特别“节省代码”，通过短短的几行代码，就能实现很不错的效果。同样的，附上本文的Demo的Github地址：[Flutter_Image_Picker](https://github.com/chaojian/image_picker)
 
+## 5. 致谢
+
+致谢 FlutterToast，程序中用到的Toast，是用到FlutterToast提供的。
+
 
