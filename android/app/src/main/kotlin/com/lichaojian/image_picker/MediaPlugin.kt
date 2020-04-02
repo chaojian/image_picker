@@ -7,13 +7,6 @@ import io.flutter.app.FlutterActivity
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 
-/**
- * @Desc: media plugin
- * @Author: lichaojian
- * @Date: 2020/2/27.
- * @Email: lichaojian@yy.com
- * @YY: 909042302
- */
 class MediaPlugin(flutterActivity: FlutterActivity) : MethodChannel.MethodCallHandler {
     companion object {
         private const val TAG = "MediaPlugin"
